@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaShoppingBasket } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 
 const NavBar = () => {
   return (
@@ -10,7 +10,7 @@ const NavBar = () => {
       <Link to="/users">Users</Link>
       <Link to="/posts">Blog</Link>
       <Link to="/cart" className="icon-cart">
-        <FaShoppingBasket />
+        <FaShoppingCart />
       </Link>
     </header>
   );

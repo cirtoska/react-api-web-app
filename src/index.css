@@ -101,8 +101,6 @@ main {
   margin: 2rem auto;
 }
 
-
-
 img {
   width: 100%;
   border-radius: var(--radius);
@@ -115,6 +113,13 @@ ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
 }
+
+/* Home Page */
+#home {
+  background-color: var(--gray-100);
+  color: var(--gray-900);
+}
+
 /* Products */
 #products, #blog {
   background-color: var(--zany-pink-50);

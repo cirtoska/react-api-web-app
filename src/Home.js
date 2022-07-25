@@ -4,8 +4,10 @@ import NavBar from "./components/NavBar";
 const Home = () => {
   return (
     <>
-      <NavBar />
-      <h1>Wellcome to My Page</h1>
+      <section id="home">
+        <NavBar />
+        <h1>Wellcome to My Page</h1>
+      </section>
     </>
   );
 };

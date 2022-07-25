@@ -45,7 +45,7 @@ const Cart = () => {
     <>
       <NavBar />
       <h1>
-        <Link to="/">Home</Link> / <Link to="/posts">Blog</Link> / Cart #
+        <Link to="/">Home</Link> / <Link to="/cart">Carts</Link> / Cart #
         {userId}
       </h1>
       <main>

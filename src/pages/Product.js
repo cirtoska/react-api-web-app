@@ -8,7 +8,7 @@ const Product = () => {
   const url = `https://dummyjson.com/products/${id}`;
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState([]);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   const fetchProduct = async () => {
     const response = await fetch(url);
