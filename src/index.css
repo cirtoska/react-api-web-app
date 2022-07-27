@@ -434,7 +434,9 @@ padding: 1rem;
   color: crimson;
   cursor: pointer;
 }
-
+.icon-invisible {
+  color: transparent;
+}
 .chekout {
   padding: 2rem;
   display: flex;

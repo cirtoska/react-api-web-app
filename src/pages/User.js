@@ -13,7 +13,7 @@ import {
 
 const User = () => {
   let { id } = useParams();
-  let location = useLocation();
+  let { pathname } = useLocation();
   const url = `https://dummyjson.com/users/${id}`;
   // const prevId = `https://dummyjson.com/users/${parseInt(id) - 1}`;
   // const nextId = `https://dummyjson.com/users/${parseInt(id) + 1}`;
@@ -31,26 +31,14 @@ const User = () => {
     setUser(user);
     setLoading(false);
   };
-  // const fetchPrevUser = async () => {
-  //   const response = await fetch(prevId);
-  //   const data = await response.json();
-  //   const user = data;
-  //   setUser(user);
-  //   setLoading(false);
-  // };
-  // const fetchNextUser = async () => {
-  //   const response = await fetch(nextId);
-  //   const data = await response.json();
-  //   const user = data;
-  //   setUser(user);
-  //   setLoading(false);
-  // };
 
   useEffect(() => {
     fetchUser();
-    // fetchPrevUser();
-    // fetchNextUser();
   }, []);
+
+  useEffect(() => {
+    fetchUser();
+  }, [pathname]);
 
   if (loading) {
     return (

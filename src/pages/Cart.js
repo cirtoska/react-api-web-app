@@ -2,22 +2,24 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import { IoTrashBin } from "react-icons/io5";
+import { IoTrashBin, IoBagCheckOutline } from "react-icons/io5";
 
 const Cart = () => {
   let { id } = useParams();
   const url = `https://dummyjson.com/carts/${id}`;
   const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState([]);
+  const [removeItem, setRemoveItem] = useState("remove");
 
   useEffect(() => {
     axios
       .get(url)
       .then((response) => {
-        console.log(response.data);
         const cart = response.data;
         setCart(cart);
         setLoading(false);
+        setRemoveItem(cart);
+        console.log(removeItem);
       })
       .catch((error) => {
         console.log(error);
@@ -41,6 +43,7 @@ const Cart = () => {
     diacountTotal,
     userId,
   } = cart;
+
   return (
     <>
       <NavBar />
@@ -63,13 +66,16 @@ const Cart = () => {
             const {
               id,
               title,
-              userId,
               price,
               quantity,
               discountedPrice,
               discountPercentage,
               total,
             } = product;
+            const removeItem = (id) => {
+              const newCart = products.filter((product) => product.id !== id);
+              console.log(newCart);
+            };
             return (
               <div className="shopping-items" key={id}>
                 <h4>{title}</h4>
@@ -80,13 +86,13 @@ const Cart = () => {
                 <p className="cart-price">
                   <strong>${discountedPrice}</strong>
                 </p>
-                <p className="icon-bin">
+                <p className="icon-bin" onClick={() => removeItem(id)}>
                   <IoTrashBin />
                 </p>
               </div>
             );
           })}
-          <div className="item-titles">
+          <div className="shopping-items">
             <p></p>
             <p></p>
             <p></p>
@@ -96,6 +102,9 @@ const Cart = () => {
             </p>
             <p>
               <strong>${total}</strong>
+            </p>
+            <p className="icon-invisible">
+              <IoBagCheckOutline />
             </p>
           </div>
           <div className="chekout">

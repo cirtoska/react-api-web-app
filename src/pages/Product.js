@@ -5,10 +5,13 @@ import { FaStar, FaMinus, FaPlus } from "react-icons/fa";
 
 const Product = () => {
   let { id } = useParams();
+  let { pathname } = useLocation();
+
   const url = `https://dummyjson.com/products/${id}`;
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState([]);
   const [count, setCount] = useState(1);
+  const [thumbnail, setThubnail] = useState();
 
   const fetchProduct = async () => {
     const response = await fetch(url);
@@ -17,11 +20,16 @@ const Product = () => {
     console.log(product);
     setLoading(false);
     setProduct(product);
+    setThubnail(product.thumbnail);
   };
 
   useEffect(() => {
     fetchProduct();
   }, []);
+
+  useEffect(() => {
+    fetchProduct();
+  }, [pathname]);
 
   if (loading) {
     return (
@@ -30,16 +38,8 @@ const Product = () => {
       </main>
     );
   }
-  const {
-    title,
-    description,
-    price,
-    category,
-    brand,
-    images,
-    rating,
-    thumbnail,
-  } = product;
+  const { title, description, price, category, brand, images, rating } =
+    product;
 
   const addItem = () => {
     setCount((prevCount) => prevCount + 1);
@@ -93,7 +93,14 @@ const Product = () => {
               <img src={thumbnail} className="thumbnail" alt="main product" />
               <div className="img-gallery">
                 {images.map((image, index) => {
-                  return <img src={image} alt="products" key={index} />;
+                  return (
+                    <img
+                      src={image}
+                      alt="products"
+                      key={index}
+                      onClick={() => setThubnail(image)}
+                    />
+                  );
                 })}
               </div>
             </div>

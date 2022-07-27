@@ -6,23 +6,25 @@ import { VscReactions } from "react-icons/vsc";
 
 const Post = () => {
   let { id } = useParams();
+  let { pathname } = useLocation();
   const url = `https://dummyjson.com/posts/${id}`;
   const [loading, setLoading] = useState(true);
   const [post, setPost] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get(url)
-      .then((response) => {
-        const data = response.data;
+  const fetchPost = async () => {
+    const response = await fetch(url);
+    const data = await response.json();
+    setPost(data);
+    setLoading(false);
+  };
 
-        setLoading(false);
-        setPost(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  useEffect(() => {
+    fetchPost();
   }, []);
+
+  useEffect(() => {
+    fetchPost();
+  }, [pathname]);
 
   if (loading) {
     return (
