@@ -10,6 +10,7 @@ import Blog from "./pages/Blog";
 import Post from "./pages/Post";
 import Carts from "./pages/Carts";
 import Cart from "./pages/Cart";
+import AddUser from "./components/AddUser";
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
         <Route path="/posts/:id" element={<Post />} />
         <Route path="/cart" element={<Carts />} />
         <Route path="/cart/:id" element={<Cart />} />
-        <Route path="/*" element={<NotFound />} />
+        <Route path="/add-user" element={<AddUser />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

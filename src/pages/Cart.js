@@ -9,7 +9,6 @@ const Cart = () => {
   const url = `https://dummyjson.com/carts/${id}`;
   const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState([]);
-  const [removeItem, setRemoveItem] = useState("remove");
 
   useEffect(() => {
     axios
@@ -18,8 +17,6 @@ const Cart = () => {
         const cart = response.data;
         setCart(cart);
         setLoading(false);
-        setRemoveItem(cart);
-        console.log(removeItem);
       })
       .catch((error) => {
         console.log(error);

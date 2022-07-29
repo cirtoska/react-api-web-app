@@ -442,3 +442,44 @@ padding: 1rem;
   display: flex;
   justify-content: space-between;
 }
+
+/* Add User */
+.form, .search-form {
+  background-color: var(--zany-pink-50);
+  color: var(--gray-900);
+  max-width: 100%;
+  margin: 0 auto;
+    margin-bottom: 4rem;
+    padding: 1rem 2rem;
+  border-radius: var(--radius);
+}
+.search-form {
+  display: flex;
+  justify-content: center;
+  
+}
+.form-component {
+    margin: 0.5rem auto;
+    width: 100%;
+    max-width: 100%;
+}
+.form-component > input {
+  background-color: var(--zany-pink-100);
+  padding: 10px;
+  border: none;
+  border-radius: var(--radius);
+  width: 50%;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+.item {
+  background: var(--zany-pink-50);
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem auto;
+  align-items: center;
+  border-radius: var(--radius);
+  color: var(--gray-900);
+  padding: 1rem 2rem;
+}

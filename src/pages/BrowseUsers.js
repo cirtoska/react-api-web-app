@@ -1,34 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import {
-  FaRegUser,
-  FaMapMarkedAlt,
-  FaRegCalendarAlt,
-  FaEnvelopeOpen,
-  FaPhoneAlt,
-} from "react-icons/fa";
 
-const url = "https://dummyjson.com/users";
+// const url = "https://dummyjson.com/users";
+const url = "https://dummyjson.com/users/search?q=";
 
 const BrowseUsers = () => {
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
-  const [title, setTitle] = useState("name");
-  const [value, setValue] = useState();
+  const [searchTerm, setSearchTerm] = useState("a");
+  const searchValue = useRef("");
 
-  const fetchUsers = async () => {
-    const response = await fetch(url);
-    const data = await response.json();
-    const users = data.users;
-    console.log(users);
-    setUsers(users);
-    setLoading(false);
-  };
+  const fetchUsers = useCallback(async () => {
+    try {
+      const response = await fetch(`${url}${searchTerm}`);
+      const data = await response.json();
+      const users = data.users;
+      setUsers(users);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  }, [searchTerm]);
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [searchTerm, fetchUsers]);
 
   if (loading) {
     return (
@@ -37,7 +35,15 @@ const BrowseUsers = () => {
       </main>
     );
   }
-
+  if (users.length < 1) {
+    return <h2 className="user-title">no such user in our database</h2>;
+  }
+  const searchUser = () => {
+    setSearchTerm(searchValue.current.value);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <>
       <NavBar />
@@ -45,6 +51,19 @@ const BrowseUsers = () => {
         <Link to="/">Home</Link> / Browse Users
       </h1>
       <main>
+        <form className="search-form" onSubmit={handleSubmit}>
+          <div className="form-component">
+            <label htmlFor="search"></label>
+            <input
+              type="search"
+              name="search"
+              id="search"
+              onChange={searchUser}
+              ref={searchValue}
+              placeholder="Search Users..."
+            />
+          </div>
+        </form>
         <div className="container">
           {users.map((user) => {
             const {
@@ -60,17 +79,6 @@ const BrowseUsers = () => {
             const address = user.address.address;
             const city = user.address.city;
             const state = user.address.state;
-
-            // const handleClick = (e) => {
-            //   if (e.target.classList.contains("icon")) {
-            //     const newValue = e.target.dataset.label;
-            //     console.log(newValue);
-            //     setValue(user[newValue]);
-
-            //     setTitle(newValue);
-            //   }
-            // };
-            //  const name = `${firstName} ${lastName}`;
 
             return (
               <Link to={`/users/${id}`} key={id}>

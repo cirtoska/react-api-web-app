@@ -13,7 +13,6 @@ import {
 
 const User = () => {
   let { id } = useParams();
-  let { pathname } = useLocation();
   const url = `https://dummyjson.com/users/${id}`;
   // const prevId = `https://dummyjson.com/users/${parseInt(id) - 1}`;
   // const nextId = `https://dummyjson.com/users/${parseInt(id) + 1}`;
@@ -34,11 +33,7 @@ const User = () => {
 
   useEffect(() => {
     fetchUser();
-  }, []);
-
-  useEffect(() => {
-    fetchUser();
-  }, [pathname]);
+  }, [id]);
 
   if (loading) {
     return (
@@ -133,12 +128,11 @@ const User = () => {
               </button>
             </div>
           </div>
-          {/* <div className="about-user">
-            <span className="icon">
-              <FaMapMarkedAlt />
-            </span>
-            {user.address.address}, {user.address.city}
-          </div> */}
+          <div className="about-user">
+            <Link to="/add-user">
+              <button className="btn">Add User</button>
+            </Link>
+          </div>
         </div>
         <div className="footer-navigation">
           <Link to={`/users/${parseInt(id) - 1}`}>

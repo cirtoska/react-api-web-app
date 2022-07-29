@@ -20,10 +20,6 @@ const Post = () => {
 
   useEffect(() => {
     fetchPost();
-  }, []);
-
-  useEffect(() => {
-    fetchPost();
   }, [pathname]);
 
   if (loading) {

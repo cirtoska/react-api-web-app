@@ -25,10 +25,6 @@ const Product = () => {
 
   useEffect(() => {
     fetchProduct();
-  }, []);
-
-  useEffect(() => {
-    fetchProduct();
   }, [pathname]);
 
   if (loading) {
