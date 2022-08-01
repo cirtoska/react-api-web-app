@@ -14,14 +14,25 @@ import {
 const User = () => {
   let { id } = useParams();
   const url = `https://dummyjson.com/users/${id}`;
-  // const prevId = `https://dummyjson.com/users/${parseInt(id) - 1}`;
-  // const nextId = `https://dummyjson.com/users/${parseInt(id) + 1}`;
+
+  const postsUrl = `https://dummyjson.com/users/${id}/posts`;
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState([]);
-  // console.log("location", location);
   const [value, setValue] = useState();
   const [title, setTitle] = useState("username");
+  const [getPosts, setGetPosts] = useState([]);
 
+  const fetchPosts = async () => {
+    const response = await fetch(postsUrl);
+    const postData = await response.json();
+    const getPosts = postData.posts;
+    console.log(getPosts);
+    setGetPosts(getPosts);
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, [id]);
   const fetchUser = async () => {
     const response = await fetch(url);
     const data = await response.json();
@@ -53,8 +64,7 @@ const User = () => {
     username,
     phone,
   } = user;
-  // const address = user.address.address;
-  // const city = user.address.city;
+
   const handleClick = (e) => {
     if (e.target.classList.contains("icon")) {
       const newValue = e.target.dataset.label;
@@ -80,7 +90,6 @@ const User = () => {
               <button
                 className="icon"
                 data-label="username"
-                // onClick={() => setValue(`${firstName} ${lastName}`)}
                 onMouseOver={handleClick}
               >
                 <FaRegUser />
@@ -88,7 +97,6 @@ const User = () => {
               <button
                 className="icon"
                 data-label="birthDate"
-                // onClick={() => setValue(birthDate)}
                 onMouseOver={handleClick}
               >
                 <FaRegCalendarAlt />
@@ -98,14 +106,12 @@ const User = () => {
                 className="icon"
                 data-label="email"
                 onMouseOver={handleClick}
-                // onClick={() => setValue(email)}
               >
                 <FaEnvelopeOpen />
               </button>
               <button
                 className="icon"
                 data-label="phone"
-                // onClick={() => setValue(phone)}
                 onMouseOver={handleClick}
               >
                 <FaPhoneAlt />
@@ -113,7 +119,6 @@ const User = () => {
               <button
                 className="icon"
                 data-label="password"
-                // onClick={() => setValue(phone)}
                 onMouseOver={handleClick}
               >
                 <FaLock />
@@ -121,7 +126,6 @@ const User = () => {
               <button
                 className="icon"
                 data-label="university"
-                // onClick={() => setValue(phone)}
                 onMouseOver={handleClick}
               >
                 <FaUniversity />
@@ -132,6 +136,18 @@ const User = () => {
             <Link to="/add-user">
               <button className="btn">Add User</button>
             </Link>
+          </div>
+          <div className="user-posts">
+            {getPosts.map((items, index) => {
+              console.log(items);
+              const { id, title, body } = items;
+              return (
+                <div key={id}>
+                  <h2>{title}</h2>
+                  <p>{body}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="footer-navigation">
