@@ -1,40 +1,49 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const url = "https://dummyjson.com/auth/login";
 const Login = () => {
-  const [signIn, setSignIn] = useState();
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
+  const [user, setUser] = useState({ username: "", password: "" });
 
-  const getLogin = () => {
+  const notify = (type, message) => toast[type](message);
+
+  let navigate = useNavigate();
+
+  const getLogin = (e) => {
+    e.preventDefault();
     axios
-      .get("url", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: "kminchelle",
-          password: "0lelplR",
-          // expiresInMins: 60, // optional
-        }),
+      .post("https://dummyjson.com/auth/login", {
+        username: user.username,
+        password: user.password,
       })
-      .then((res) => res.json())
-      .then(console.log);
+      .then((res) => {
+        console.log("res", res.data);
+        notify("success", "success");
+        navigate("/", { replace: true });
+      })
+      .catch((error) => {
+        notify("error", error.response.data.message);
+        console.log("error", error);
+      });
   };
-
   useEffect(() => {
-    getLogin();
-  });
-
+    console.log("user", user);
+  }, [user]);
   return (
     <>
       <NavBar />
+      <ToastContainer />
       <main>
         <h1>
           <Link to="/">Home</Link> / Login
         </h1>
         <div className="login-wraper">
-          <form className="login-form">
+          <form className="login-form" onSubmit={getLogin}>
             <div className="login-container">
               <label htmlFor="username">Username</label>
               <input
@@ -42,6 +51,7 @@ const Login = () => {
                 name="username"
                 id="username"
                 placeholder="enter your username"
+                onChange={(e) => setUser({ ...user, username: e.target.value })}
               />
             </div>
             <div className="login-container">
@@ -51,15 +61,18 @@ const Login = () => {
                 name="password"
                 id="password"
                 placeholder="enter your password"
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
               />
               <Link to="#" className="forgot-pass">
                 Forgot Your Password?
               </Link>
             </div>
-            <button type="submit" className="btn btn-xl">
-              Sign In
-            </button>
 
+            <div>
+              <button type="submit" className="btn btn-xl">
+                Sign In
+              </button>
+            </div>
             <div className="signup">
               <p>Don't have an account yet?</p>
               <Link to="#">
