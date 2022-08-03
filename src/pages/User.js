@@ -81,8 +81,13 @@ const User = () => {
           <Link to="/">Home</Link> / <Link to="/users">Users</Link> /{" "}
           {firstName} {lastName}
         </h1>
-        <div className="product-card user">
+        <div className="product-card">
           <div className="block">
+            <div className="about-user">
+              <Link to="/add-user">
+                <button className="btn">Add New User</button>
+              </Link>
+            </div>
             <img src={image} alt={username} className="user-image" />
             <p className="user-title">My {title} is</p>
             <p className="user-value">{value}</p>
@@ -132,19 +137,16 @@ const User = () => {
               </button>
             </div>
           </div>
-          <div className="about-user">
-            <Link to="/add-user">
-              <button className="btn">Add User</button>
-            </Link>
-          </div>
+
           <div className="user-posts">
+            <h2>Posts from {firstName}</h2>
             {getPosts.map((items, index) => {
               console.log(items);
               const { id, title, body } = items;
               return (
                 <div key={id}>
-                  <h2>{title}</h2>
-                  <p>{body}</p>
+                  <h3>{title}</h3>
+                  {/* <p>{body}</p> */}
                 </div>
               );
             })}

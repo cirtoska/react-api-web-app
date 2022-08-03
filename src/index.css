@@ -120,6 +120,111 @@ ul {
   color: var(--gray-900);
 }
 
+article > .home-slide {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  justify-content: center;
+  align-content: center;
+  padding: 0 3rem;
+  position: relative;
+}
+
+.slider-center {
+display: flex;
+  margin-top: 4rem;
+  max-width: 80vh;
+  height: 350px;
+  margin: 2rem auto;
+  max-width: 80%;
+  position: relative;
+  overflow: hidden; 
+}
+.slider-image img {
+  max-width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.slider-text button {
+  margin-top: 2rem;
+}
+.discount p {
+  position: absolute;
+  top: 26px;
+  left: 55px;
+  z-index: 2;
+  color: var(--white);
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+.discount-icon svg{
+  position: absolute;
+  top: 0;
+  left: 50px;
+width: 80px;
+  height: 80px;
+
+}
+.prev,
+.next {
+  position: absolute;
+  top: 150px;
+  transform: translateY(-50%);
+  background: var(--zany-pink-500);
+  color: var(--white);
+  width: 1.25rem;
+  height: 1.25rem;
+  display: grid;
+  place-items: center;
+  border-color: transparent;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.prev:hover,
+.next:hover {
+  background: var(--zany-pink-300);
+}
+.prev {
+  left: 0;
+}
+.next {
+  right: 0;
+}
+@media (min-width: 800px) {
+  .text {
+    max-width: 45em;
+  }
+  .prev,
+  .next {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.5rem;
+  }
+}
+article {
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: var(--transition);
+}
+article.activeSlide {
+  opacity: 1;
+  transform: translateX(0);
+}
+article.lastSlide {
+  transform: translateX(-100%);
+}
+article.nextSlide {
+  transform: translateX(100%);
+}
+
 /* Products */
 #products, #blog {
   background-color: var(--zany-pink-50);
@@ -285,6 +390,13 @@ ul {
 }
 
 /* Users */
+.user-posts {
+  /* text-align: left; */
+}
+.about-user {
+  text-align: right;
+  margin-bottom: 1rem;
+}
 
 img.user-image {
   width: 150px;
@@ -472,7 +584,9 @@ padding: 1rem;
   font-size: 1rem;
   margin-left: 1rem;
 }
-
+.form-component > input:focus {
+  outline: var(--zany-pink-200) 2px solid;
+}
 .item {
   background: var(--zany-pink-50);
   display: flex;
@@ -482,4 +596,70 @@ padding: 1rem;
   border-radius: var(--radius);
   color: var(--gray-900);
   padding: 1rem 2rem;
+}
+
+/* Login Page */
+.login-wraper {
+  background: var(--zany-pink-50);
+  margin: 0 2rem;
+  padding: 2rem;
+  border-radius: var(--radius);
+  outline: var(--gray-100) 5px solid;
+  box-shadow: var(--dark-shadow);
+}
+
+.login-container {
+  margin: 1rem;
+}
+
+.login-container {
+  color: var(--clr-text-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.login-container > input {
+  width: 300px;
+  max-width: 100%;
+  border-radius: var(--radius);
+  padding: 0.7rem;
+  margin: 0.5rem auto;
+  outline: 0;
+  border: 0;
+  box-shadow: var(--light-shadow);
+  font-size: 1rem;
+}
+
+.login-container > input::placeholder {
+  color: var(--gray-500);
+  font-size: 1rem;
+}
+
+.login-container > input:focus {
+  outline: var(--zany-pink-200) 2px solid;
+}
+.forgot-pass {
+  color: var(--zany-pink-500);
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.btn-xl {
+  width: 300px;
+  max-width: 100%
+}
+.signup {
+  background: var(--zany-pink-100);
+  padding: 1rem;
+  color: var(--gray-900);
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
 }
