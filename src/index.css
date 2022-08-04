@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;500;600;700&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+
 :root {
   --white: #fff;
   --gray-50: hsl(230, 33%, 96%);
@@ -50,8 +52,9 @@ h1 {
   font-size: 3rem;
 }
 h2 {
-  /* padding: 1rem; */
+  /* padding:1rem; */ 
   font-size: 2rem;
+
 }
 header {
   background-color: var(--zany-pink-600);
@@ -519,11 +522,71 @@ padding: 1rem;
 }
 
 /* Post */
-
+.post-title {
+  /* border-bottom: 1px solid var(--zany-pink-200); */
+  padding-bottom: 1rem;
+  font-family: 'Comfortaa', cursive;
+}
 .single-post {
-  height: 70vh;
+  text-align: left;
 }
 
+.comments-section {
+  text-align: left;
+}
+
+.comment-body {
+  background: var(--gray-100);
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: var(--radius);
+}
+
+.comment-body h3, .comment-body p {
+  padding-bottom: 1rem;
+}
+.comment-body h3 {
+  display: inline-block;
+}
+
+.comment-body a {
+  color: var(--zany-pink-600);
+  text-decoration: underline 2px;
+}
+.comment-body a:hover {
+  color: var(--gray-900);
+  transition: var(--transition);
+}
+
+.comment-form {
+  padding: 2rem;
+  
+  border-radius: var(--radius);
+  border: 3px solid var(--gray-100);
+}
+
+.comment-container {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.comment-container input,
+.comment-container textarea {
+  background: var(--gray-50);
+  border: 0;
+  border-radius: var(--radius);
+  padding: 0.5rem;
+  width: 50%;
+} 
+.comment-container textarea {
+  height: 150px;
+}
+.comment-container input:focus,
+.comment-container textarea:focus {
+  outline: 2px solid var(--zany-pink-300);
+} 
 /* Shopping Cart */
 .item-titles {
   display: grid;

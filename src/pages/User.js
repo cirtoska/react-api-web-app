@@ -26,18 +26,17 @@ const User = () => {
     const response = await fetch(postsUrl);
     const postData = await response.json();
     const getPosts = postData.posts;
-    console.log(getPosts);
     setGetPosts(getPosts);
   };
 
   useEffect(() => {
     fetchPosts();
   }, [id]);
+
   const fetchUser = async () => {
     const response = await fetch(url);
     const data = await response.json();
     const user = data;
-    console.log(user);
     setUser(user);
     setLoading(false);
   };
@@ -140,13 +139,12 @@ const User = () => {
 
           <div className="user-posts">
             <h2>Posts from {firstName}</h2>
-            {getPosts.map((items, index) => {
-              console.log(items);
+            {getPosts.map((items) => {
               const { id, title, body } = items;
               return (
                 <div key={id}>
                   <h3>{title}</h3>
-                  {/* <p>{body}</p> */}
+                  <p>{body}</p>
                 </div>
               );
             })}

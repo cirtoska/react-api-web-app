@@ -43,7 +43,7 @@ const Blog = () => {
             const { id, title, body, tags } = post;
             return (
               <li className="blog-post" key={id}>
-                <h2>{`${title.substring(0, 50)}...`}</h2>
+                <h2 className="post-title">{`${title.substring(0, 50)}...`}</h2>
                 <div className="product-header">
                   <span className="tags">
                     {tags.map((tag, index) => {

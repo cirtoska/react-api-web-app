@@ -8,8 +8,16 @@ const Post = () => {
   let { id } = useParams();
   let { pathname } = useLocation();
   const url = `https://dummyjson.com/posts/${id}`;
+  const commentsUrl = `https://dummyjson.com/comments/post/${id}`;
+
   const [loading, setLoading] = useState(true);
   const [post, setPost] = useState([]);
+  const [comments, setComments] = useState([]);
+  const [addComment, setAddComment] = useState({
+    body: "",
+    postId: "",
+    userId: "",
+  });
 
   const fetchPost = async () => {
     const response = await fetch(url);
@@ -18,9 +26,40 @@ const Post = () => {
     setLoading(false);
   };
 
+  const fetchComments = async () => {
+    const response = await fetch(commentsUrl);
+    const commentsData = await response.json();
+    const comments = commentsData.comments;
+    setComments(comments);
+    setLoading(false);
+  };
+
   useEffect(() => {
     fetchPost();
+    fetchComments();
   }, [pathname]);
+
+  const addNewComment = () => {
+    axios
+      .post("https://dummyjson.com/comments/add", {
+        body: "",
+        postId: "",
+        userId: "",
+      })
+      .then((res) => {
+        console.log("res", res);
+        // notify("success", "success");
+        // navigate("/", { replace: true });
+      })
+      .catch((error) => {
+        // notify("error", error.response.data.message);
+        console.log("error", error);
+      });
+  };
+  useEffect(() => {
+    // console.log(data);
+    addNewComment(addComment);
+  }, [addComment]);
 
   if (loading) {
     return (
@@ -31,7 +70,7 @@ const Post = () => {
   }
   if (post.length === 0) return null;
   const { title, body, userId, reactions, tags } = post;
-
+  console.log(userId);
   return (
     <>
       <NavBar />
@@ -40,7 +79,7 @@ const Post = () => {
       </h1>
       <main>
         <div className="product-card single-post">
-          <h1>{title}</h1>
+          <h1 className="post-title">{title}</h1>
           <div className="product-header">
             <span className="tags">
               {tags.map((tag, index) => {
@@ -60,6 +99,50 @@ const Post = () => {
             </span>
           </div>
           <p className="description">{body}</p>
+          <div className="comments-section">
+            <h2>
+              - Comments <sup>{comments.length}</sup>
+            </h2>
+            {comments.map((comment) => {
+              const { id, body, postId, user } = comment;
+
+              return (
+                <div className="comments" key={id}>
+                  <div className="comment-body">
+                    <h3>
+                      <Link to={`/users/${id}`}>{user.username}</Link> wrote
+                    </h3>
+                    <p>{body}</p>
+                    <button className="btn">Reply</button>
+                  </div>
+                </div>
+              );
+            })}
+            <div className="add-new-comment">
+              <h2>Leave a comment</h2>
+              <form className="comment-form" onSubmit={addNewComment}>
+                <div className="comment-container">
+                  <label htmlFor="username">Your name</label>
+                  <input
+                    type="text"
+                    name="username"
+                    id="username"
+
+                    // onChange={(e) =>
+                    //   setAddComment({ ...user, username: e.target.value })
+                    // }
+                  />
+                </div>
+                <div className="comment-container">
+                  <label htmlFor="textarea">Your Message</label>
+                  <textarea id="textarea" />
+                </div>
+                <button type="submit" className="btn btn-xl">
+                  Send
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
         <div className="footer-navigation">
           <Link to={`/posts/${parseInt(id) - 1}`}>
