@@ -1,16 +1,20 @@
 import React from "react";
 import NavBar from "./components/NavBar";
 import Slider from "./components/Slider";
+import HomePostList from "./components/HomePostList";
+import FilterUsers from "./components/FilterUsers";
 
 const Home = () => {
   return (
     <>
       <section id="home">
         <NavBar />
-        <h1>Wellcome to My Page</h1>
-        <section className="subtitle">
-          <Slider />
-        </section>
+        <h1 className="primary-title">
+          Dummy<span className="primary-text">JSON</span>
+        </h1>
+        <Slider />
+        <HomePostList />
+        <FilterUsers />
       </section>
     </>
   );

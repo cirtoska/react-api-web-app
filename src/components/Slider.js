@@ -12,7 +12,6 @@ const Slider = () => {
     const response = await fetch(url);
     const data = await response.json();
     const laptops = data.products;
-    console.log(laptops);
     setLaptops(laptops);
   };
   useEffect(() => {

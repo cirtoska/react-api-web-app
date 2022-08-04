@@ -42,17 +42,14 @@ const Post = () => {
   const addNewComment = () => {
     axios
       .post("https://dummyjson.com/comments/add", {
-        body: "",
-        postId: "",
-        userId: "",
+        body: addComment.body,
+        postId: addComment.postId,
+        userId: addComment.userId,
       })
       .then((res) => {
         console.log("res", res);
-        // notify("success", "success");
-        // navigate("/", { replace: true });
       })
       .catch((error) => {
-        // notify("error", error.response.data.message);
         console.log("error", error);
       });
   };
@@ -127,15 +124,19 @@ const Post = () => {
                     type="text"
                     name="username"
                     id="username"
-
-                    // onChange={(e) =>
-                    //   setAddComment({ ...user, username: e.target.value })
-                    // }
+                    onChange={(e) =>
+                      setAddComment({ ...addComment, username: e.target.value })
+                    }
                   />
                 </div>
                 <div className="comment-container">
                   <label htmlFor="textarea">Your Message</label>
-                  <textarea id="textarea" />
+                  <textarea
+                    id="textarea"
+                    onChange={(e) =>
+                      setAddComment({ ...addComment, body: e.target.value })
+                    }
+                  />
                 </div>
                 <button type="submit" className="btn btn-xl">
                   Send
