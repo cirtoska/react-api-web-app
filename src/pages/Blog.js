@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const Blog = () => {
   const [loading, setLoading] = useState(true);
@@ -65,6 +66,7 @@ const Blog = () => {
           })}
         </ul>
       </main>
+      <Footer />
     </>
   );
 };

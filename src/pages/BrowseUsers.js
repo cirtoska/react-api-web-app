@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import { debounce } from "lodash";
+import Footer from "../components/Footer";
 
 // const url = "https://dummyjson.com/users";
 const url = "https://dummyjson.com/users/search?q=";
@@ -104,6 +105,7 @@ const BrowseUsers = () => {
           })}
         </div>
       </main>
+      <Footer />
     </>
   );
 };

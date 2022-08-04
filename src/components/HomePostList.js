@@ -23,7 +23,7 @@ const HomePostList = () => {
 
   return (
     <>
-      <h3>-- LATEST POSTS --</h3>
+      <h1>Latest Posts</h1>
       <section className="home-posts">
         {posts.map((post) => {
           const { id, title, body, tags } = post;

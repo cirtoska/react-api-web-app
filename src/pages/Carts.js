@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FaShoppingBag } from "react-icons/fa";
+import Footer from "../components/Footer";
 
 const Carts = () => {
   const url = "https://dummyjson.com/carts";
@@ -56,6 +57,7 @@ const Carts = () => {
           })}
         </ul>
       </main>
+      <Footer />
     </>
   );
 };

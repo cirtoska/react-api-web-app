@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import axios from "axios";
 import { useParams, useLocation, Link } from "react-router-dom";
 import { VscReactions } from "react-icons/vsc";
+import Footer from "../components/Footer";
 
 const Post = () => {
   let { id } = useParams();
@@ -72,7 +73,7 @@ const Post = () => {
     <>
       <NavBar />
       <h1>
-        <Link to="/">Home</Link> / <Link to="/posts">Blog</Link> / {title}
+        <Link to="/">Home</Link> / <Link to="/posts">Blog</Link>
       </h1>
       <main>
         <div className="product-card single-post">
@@ -92,7 +93,7 @@ const Post = () => {
               <span className="star-icon">
                 <VscReactions />
               </span>
-              {reactions}
+              <sup>{reactions}</sup>
             </span>
           </div>
           <p className="description">{body}</p>
@@ -154,6 +155,7 @@ const Post = () => {
           </Link>
         </div>
       </main>
+      <Footer />
     </>
   );
 };

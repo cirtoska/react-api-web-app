@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { IoTrashBin, IoBagCheckOutline } from "react-icons/io5";
+import Footer from "../components/Footer";
 
 const Cart = () => {
   let { id } = useParams();
@@ -110,6 +111,7 @@ const Cart = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 };

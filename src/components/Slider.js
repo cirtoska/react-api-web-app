@@ -55,7 +55,7 @@ const Slider = () => {
                   </div>
                 </div>
                 <div className="slider-text">
-                  <h1 className="slider-title">{title}</h1>
+                  <h2 className="slider-title">{title}</h2>
                   <p className="slider-description">{description}</p>
                   <Link to={`/products/${id}`}>
                     <button className="btn">read more</button>

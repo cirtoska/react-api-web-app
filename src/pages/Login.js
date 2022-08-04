@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "../components/Footer";
 
 const Login = () => {
   // const [username, setUsername] = useState("");
@@ -82,6 +83,7 @@ const Login = () => {
           </form>
         </div>
       </main>
+      <Footer />
     </>
   );
 };

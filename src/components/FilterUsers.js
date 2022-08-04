@@ -11,10 +11,8 @@ const FilterUsers = () => {
     axios
       .get(filterUrl)
       .then((response) => {
-        const users = response.data.users;
-        console.log(users);
-
-        setUsers(users);
+        console.log(response.data.users);
+        setUsers(response.data.users);
       })
       .catch((error) => {
         console.log(error);
@@ -26,12 +24,25 @@ const FilterUsers = () => {
   }, []);
   if (!users === 0) return null;
   return (
-    <div>
-      {users.map((user) => {
-        const { firstName, lastName, image, company } = user;
-        return console.log(company.title);
-      })}
-    </div>
+    <section id="services">
+      <h1>Meet our Team</h1>
+      <div className="user-services">
+        {users.map((user, index) => {
+          const { firstName, lastName, image, company } = user;
+          return (
+            <div className="services" key={index}>
+              <img src={image} alt={firstName} />
+              <div className="services-description">
+                <h2 className="post-title">
+                  {firstName} {lastName}
+                </h2>
+                <p className="job-title">{company.title}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
   );
 };
 

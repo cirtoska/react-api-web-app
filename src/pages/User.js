@@ -10,6 +10,7 @@ import {
   FaEnvelopeOpen,
   FaPhoneAlt,
 } from "react-icons/fa";
+import Footer from "../components/Footer";
 
 const User = () => {
   let { id } = useParams();
@@ -164,6 +165,7 @@ const User = () => {
           </Link>
         </div>
       </main>
+      <Footer />
     </>
   );
 };

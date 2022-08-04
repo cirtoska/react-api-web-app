@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "./NavBar";
 import axios from "axios";
+import Footer from "./Footer";
 
 const AddUser = () => {
   const [firstName, setFirstName] = useState("");
@@ -72,6 +73,7 @@ const AddUser = () => {
           );
         })}
       </main>
+      <Footer />
     </>
   );
 };

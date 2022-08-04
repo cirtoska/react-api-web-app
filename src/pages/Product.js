@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import { FaStar, FaMinus, FaPlus } from "react-icons/fa";
+import Footer from "../components/Footer";
 
 const Product = () => {
   let { id } = useParams();
@@ -111,6 +112,7 @@ const Product = () => {
           </Link>
         </div>
       </main>
+      <Footer />
     </>
   );
 };
