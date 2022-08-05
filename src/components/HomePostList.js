@@ -22,9 +22,9 @@ const HomePostList = () => {
   if (posts.length === 0) return null;
 
   return (
-    <>
+    <section id="home-posts">
       <h1>Latest Posts</h1>
-      <section className="home-posts">
+      <div className="home-posts">
         {posts.map((post) => {
           const { id, title, body, tags } = post;
           return (
@@ -53,8 +53,8 @@ const HomePostList = () => {
             </div>
           );
         })}
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 
