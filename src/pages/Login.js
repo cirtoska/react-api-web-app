@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "../components/Footer";
+import apiClient from "../utility/apiCall";
 
 const Login = () => {
   // const [username, setUsername] = useState("");
   // const [password, setPassword] = useState("");
   const [user, setUser] = useState({ username: "", password: "" });
-
+  let { id } = useParams();
   const notify = (type, message) => toast[type](message);
 
   let navigate = useNavigate();
 
   const getLogin = (e) => {
     e.preventDefault();
-    axios
+    apiClient
       .post("https://dummyjson.com/auth/login", {
         username: user.username,
         password: user.password,
@@ -25,7 +26,7 @@ const Login = () => {
       .then((res) => {
         console.log("res", res.data);
         notify("success", "success");
-        navigate("/", { replace: true });
+        navigate(`/users`, { replace: true });
       })
       .catch((error) => {
         notify("error", error.response.data.message);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import apiClient from "../utility/apiCall";
 
 const filterUrl =
   "https://dummyjson.com/users/filter?key=company.department&value=Services";
@@ -8,7 +8,7 @@ const filterUrl =
 const FilterUsers = () => {
   const [users, setUsers] = useState("");
   const fetchUsers = () => {
-    axios
+    apiClient
       .get(filterUrl)
       .then((response) => {
         console.log(response.data.users);
@@ -22,12 +22,12 @@ const FilterUsers = () => {
   useEffect(() => {
     fetchUsers();
   }, []);
-  if (!users === 0) return null;
+  if (!users) return null;
   return (
     <section id="services">
       <h1>Meet our Team</h1>
       <div className="user-services">
-        {users.map((user, index) => {
+        {users?.map((user, index) => {
           const { firstName, lastName, image, company } = user;
           return (
             <div className="services" key={index}>
