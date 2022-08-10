@@ -15,7 +15,9 @@ const NavBar = () => {
       linksContainerRef.current.style.height = "0px";
     }
   }, [showLinks]);
-
+  const logOut = () => {
+    localStorage.removeItem("token");
+  };
   return (
     <header>
       <div className="nav-header">
@@ -34,6 +36,14 @@ const NavBar = () => {
             <FaShoppingCart />
           </Link>
           <Link to="/login" className="icon-cart" title="Login">
+            <FaSignInAlt />
+          </Link>
+          <Link
+            to="/login"
+            className="icon-cart"
+            title="LogOut"
+            onClick={logOut}
+          >
             <FaSignInAlt />
           </Link>
         </div>

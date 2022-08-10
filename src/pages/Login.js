@@ -25,8 +25,9 @@ const Login = () => {
       })
       .then((res) => {
         console.log("res", res.data);
+        localStorage.setItem("token", JSON.stringify(res.data.token));
         notify("success", "success");
-        navigate(`/users`, { replace: true });
+        navigate(`/users/`, { replace: true });
       })
       .catch((error) => {
         notify("error", error.response.data.message);
@@ -36,6 +37,7 @@ const Login = () => {
   useEffect(() => {
     console.log("user", user);
   }, [user]);
+
   return (
     <>
       <NavBar />
