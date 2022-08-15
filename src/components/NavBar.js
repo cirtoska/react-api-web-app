@@ -1,6 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaShoppingCart, FaSignInAlt, FaBars } from "react-icons/fa";
+import {
+  FaShoppingCart,
+  FaSignInAlt,
+  FaSignOutAlt,
+  FaBars,
+} from "react-icons/fa";
 
 const NavBar = () => {
   const [showLinks, setShowLinks] = useState(false);
@@ -18,6 +23,9 @@ const NavBar = () => {
   const logOut = () => {
     localStorage.removeItem("token");
   };
+
+  let auth = { token: JSON.parse(localStorage.getItem("token")) };
+
   return (
     <header>
       <div className="nav-header">
@@ -35,17 +43,15 @@ const NavBar = () => {
           <Link to="/cart" className="icon-cart" title="Carts List">
             <FaShoppingCart />
           </Link>
-          <Link to="/login" className="icon-cart" title="Login">
-            <FaSignInAlt />
-          </Link>
-          <Link
-            to="/login"
-            className="icon-cart"
-            title="LogOut"
-            onClick={logOut}
-          >
-            <FaSignInAlt />
-          </Link>
+          {auth.token ? (
+            <Link to="/" className="icon-cart" title="LogOut" onClick={logOut}>
+              <FaSignOutAlt />
+            </Link>
+          ) : (
+            <Link to="/login" className="icon-cart" title="Login">
+              <FaSignInAlt />
+            </Link>
+          )}
         </div>
       </div>
     </header>

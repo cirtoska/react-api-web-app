@@ -12,6 +12,7 @@ import Carts from "./pages/Carts";
 import Cart from "./pages/Cart";
 import AddUser from "./components/AddUser";
 import Login from "./pages/Login";
+import PrivateRoutes from "./utility/PrivateRoutes";
 
 function App() {
   return (
@@ -20,15 +21,17 @@ function App() {
       {/* <ProductList /> */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/products" element={<ProductList />} />
-        <Route path="/products/:id" element={<Product />} />
-        <Route path="/users" element={<BrowseUsers />} />
-        <Route path="/users/:id" element={<User />} />
-        <Route path="/posts" element={<Blog />} />
-        <Route path="/posts/:id" element={<Post />} />
-        <Route path="/cart" element={<Carts />} />
-        <Route path="/cart/:id" element={<Cart />} />
-        <Route path="/add-user" element={<AddUser />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path="/products" element={<ProductList />} />
+          <Route path="/products/:id" element={<Product />} />
+          <Route path="/users" element={<BrowseUsers />} />
+          <Route path="/users/:id" element={<User />} />
+          <Route path="/posts" element={<Blog />} />
+          <Route path="/posts/:id" element={<Post />} />
+          <Route path="/cart" element={<Carts />} />
+          <Route path="/cart/:id" element={<Cart />} />
+          <Route path="/add-user" element={<AddUser />} />
+        </Route>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
