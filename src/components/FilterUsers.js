@@ -28,14 +28,16 @@ const FilterUsers = () => {
       <h1>Meet our Team</h1>
       <div className="user-services">
         {users?.map((user, index) => {
-          const { firstName, lastName, image, company } = user;
+          const { firstName, lastName, image, company, id } = user;
           return (
             <div className="services" key={index}>
               <img src={image} alt={firstName} />
               <div className="services-description">
-                <h2 className="post-title">
-                  {firstName} {lastName}
-                </h2>
+                <Link to={`/users/${id}`}>
+                  <h2 className="post-title">
+                    {firstName} {lastName}
+                  </h2>
+                </Link>
                 <p className="job-title">{company.title}</p>
               </div>
             </div>

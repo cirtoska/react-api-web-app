@@ -8,16 +8,16 @@ import Footer from "./components/Footer";
 const Home = () => {
   return (
     <>
+      <NavBar />
       <section id="home">
-        <NavBar />
         <h1 className="primary-title">
           Dummy<span className="primary-text">JSON</span>
         </h1>
         <Slider />
         <HomePostList />
         <FilterUsers />
-        <Footer />
       </section>
+      <Footer />
     </>
   );
 };
