@@ -336,7 +336,6 @@ article.nextSlide {
   border-radius: 50%;
   background-color: var(--white);
   border: 10px solid var(--gray-100);
-
  }
  .services-description > a {
   color: var(--clr-text-primary);

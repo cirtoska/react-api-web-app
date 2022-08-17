@@ -40,6 +40,7 @@ const NavBar = () => {
           <Link to="/products">Products</Link>
           <Link to="/users">Users</Link>
           <Link to="/posts">Blog</Link>
+          <Link to="/todolist">ToDoList</Link>
           <Link to="/cart" className="icon-cart" title="Carts List">
             <FaShoppingCart />
           </Link>
