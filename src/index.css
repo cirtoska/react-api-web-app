@@ -802,6 +802,13 @@ h2.post-title {
 .form-component > input:focus {
   outline: var(--zany-pink-200) 2px solid;
 }
+
+.btn-submit {
+  padding: 10px;
+  border: none;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 1rem;
+}
 .item {
   background: var(--zany-pink-50);
   display: flex;
@@ -877,6 +884,27 @@ h2.post-title {
   justify-content: center;
   border-radius: var(--radius);
   font-size: 0.9rem;
+}
+
+
+/* todo list */
+
+.todo-list {
+  background-color: var(--zany-pink-50);
+  height: 47vh;
+  color: var(--clr-text-primary);
+}
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem auto;
+  padding: 0.4rem;
+  width: 46%;
+}
+.todo-item:hover {
+  background-color: var(--gray-50);
+  border-radius: var(--radius);
+
 }
 
 /* Footer */

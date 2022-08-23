@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import { FaTrash } from "react-icons/fa";
 
 const getLocalStorage = () => {
   let list = localStorage.getItem("list");
@@ -12,35 +13,35 @@ const getLocalStorage = () => {
 };
 
 const ToDoList = () => {
-  const [toDo, setToDo] = useState([]);
-  const [list, setList] = useState(getLocalStorage());
+  const [toDo, setToDo] = useState(getLocalStorage());
+
   const toDoValue = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(toDo);
-    if (toDo) {
-      setToDo((toDo) => [...toDo, toDoValue.current.value]);
-    } else {
-      const newItem = { id: new Date().getTime().toString(), title: toDo };
 
-      setList([...list, newItem]);
-      setToDo("");
-    }
+    setToDo((toDo) => [...toDo, toDoValue.current.value]);
   };
-  const removeItem = (id) => {
-    setList(list.filter((item) => item.id !== id));
-  };
+
   useEffect(() => {
-    localStorage.setItem("list", JSON.stringify(list));
-  }, [list]);
+    localStorage.setItem("list", JSON.stringify(toDo));
+  }, [toDo]);
+
+  const clearList = () => {
+    setToDo([]);
+  };
+
+  const removeItem = (index) => {
+    setToDo(toDo.filter((item) => item.index !== index));
+  };
 
   if (!toDo) return null;
   return (
     <div>
       <NavBar />
       <h1>To Do List</h1>
-      <main>
+      <main className="todo-list">
         <form onSubmit={handleSubmit} className="search-form">
           <div className="form-component">
             <input
@@ -48,17 +49,22 @@ const ToDoList = () => {
               placeholder="Add Your Item Here"
               ref={toDoValue}
             />
-            {/* <button className="btn" type="submit">
-              Submit
-            </button> */}
           </div>
         </form>
-        <div className="container">
+        <div>
           <ul>
             {toDo.map((item, index) => {
-              return <li key={index}>{item}</li>;
+              return (
+                <li className="todo-item" key={index}>
+                  <p>{item}</p>
+                  <button onClick={() => removeItem(index)}>
+                    <FaTrash />
+                  </button>
+                </li>
+              );
             })}
           </ul>
+          <button onClick={clearList}>clear-list</button>
         </div>
       </main>
       <Footer />
