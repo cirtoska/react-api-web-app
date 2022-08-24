@@ -891,7 +891,7 @@ h2.post-title {
 
 .todo-list {
   background-color: var(--zany-pink-50);
-  height: 47vh;
+  min-height: 47vh;
   color: var(--clr-text-primary);
 }
 .todo-item {
@@ -900,6 +900,10 @@ h2.post-title {
   margin: 0.5rem auto;
   padding: 0.4rem;
   width: 46%;
+}
+
+.todo-item.done {
+   text-decoration: line-through var(--gray-700);
 }
 .todo-item:hover {
   background-color: var(--gray-50);

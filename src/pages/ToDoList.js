@@ -1,48 +1,70 @@
 import React, { useState, useRef, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-import { FaTrash } from "react-icons/fa";
-
-const getLocalStorage = () => {
-  let list = localStorage.getItem("list");
-  if (list) {
-    return (list = JSON.parse(localStorage.getItem("list")));
-  } else {
-    return [];
-  }
-};
+import { IoTrashBin } from "react-icons/io5";
 
 const ToDoList = () => {
+  const getLocalStorage = () => {
+    const local = localStorage.getItem("toDo");
+    if (local !== null) {
+      return JSON.parse(local);
+    } else {
+      return [];
+    }
+  };
   const [toDo, setToDo] = useState(getLocalStorage());
 
   const toDoValue = useRef(null);
 
+  useEffect(() => {
+    toDoValue.current.focus();
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(toDo);
 
-    setToDo((toDo) => [...toDo, toDoValue.current.value]);
+    const todo = {
+      id: Math.floor(Math.random() * 1000000),
+      name: toDoValue.current.value,
+      done: false,
+    };
+
+    setToDo((toDo) => [...toDo, todo]);
+    toDoValue.current.value = "";
   };
 
   useEffect(() => {
-    localStorage.setItem("list", JSON.stringify(toDo));
+    localStorage.setItem("toDo", JSON.stringify(toDo));
+    console.log(toDo);
   }, [toDo]);
 
   const clearList = () => {
     setToDo([]);
   };
 
-  const removeItem = (index) => {
-    setToDo(toDo.filter((item) => item.index !== index));
+  const markDone = (id) => {
+    const newArrey = toDo.map((item) => {
+      if (item.id === id) {
+        item.done = !item.done;
+        return item;
+      }
+      return item;
+    });
+    setToDo(newArrey);
   };
 
-  if (!toDo) return null;
+  const removeItem = (id) => {
+    const newList = toDo.filter((item) => item.id !== id);
+    setToDo(newList);
+  };
+
+  // if (!toDo) return null;
   return (
     <div>
       <NavBar />
       <h1>To Do List</h1>
       <main className="todo-list">
-        <form onSubmit={handleSubmit} className="search-form">
+        <form className="search-form" onSubmit={handleSubmit}>
           <div className="form-component">
             <input
               type="text"
@@ -53,13 +75,22 @@ const ToDoList = () => {
         </form>
         <div>
           <ul>
-            {toDo.map((item, index) => {
+            {toDo.map((toDo, id) => {
+              console.log(toDo);
               return (
-                <li className="todo-item" key={index}>
-                  <p>{item}</p>
-                  <button onClick={() => removeItem(index)}>
-                    <FaTrash />
-                  </button>
+                <li
+                  className={toDo.done ? "done todo-item" : "todo-item"}
+                  key={id}
+                >
+                  <p onClick={() => markDone(toDo.id)}>{toDo.name}</p>
+                  {toDo.done ? (
+                    <p className="icon-bin" onClick={() => removeItem(toDo.id)}>
+                      <IoTrashBin />
+                    </p>
+                  ) : null}
+                  {/* <p className="icon-bin" onClick={() => removeItem(toDo.id)}>
+                      <IoTrashBin />
+                  </p> */}
                 </li>
               );
             })}

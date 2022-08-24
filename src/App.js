@@ -14,6 +14,7 @@ import AddUser from "./components/AddUser";
 import Login from "./pages/Login";
 import PrivateRoutes from "./utility/PrivateRoutes";
 import ToDoList from "./pages/ToDoList";
+import PassingThoughts from "./pages/PassingThoughts";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/cart/:id" element={<Cart />} />
           <Route path="/add-user" element={<AddUser />} />
           <Route path="/todolist" element={<ToDoList />} />
+          <Route path="/thoughts" element={<PassingThoughts />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
