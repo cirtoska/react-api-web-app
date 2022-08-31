@@ -15,6 +15,8 @@ import Login from "./pages/Login";
 import PrivateRoutes from "./utility/PrivateRoutes";
 import ToDoList from "./pages/ToDoList";
 import PassingThoughts from "./pages/PassingThoughts";
+import TestContext from "./pages/TestContext";
+import TestContextCopy from "./pages/TestContextCopy";
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
           <Route path="/add-user" element={<AddUser />} />
           <Route path="/todolist" element={<ToDoList />} />
           <Route path="/thoughts" element={<PassingThoughts />} />
+          <Route path="/testcontext" element={<TestContext />} />
+          <Route path="/testcontext1" element={<TestContextCopy />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />

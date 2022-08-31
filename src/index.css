@@ -411,6 +411,10 @@ article.nextSlide {
   background-color: var(--zany-pink-500);
 }
 
+.btn:active {
+  transform: scale(1.05);
+}
+
 .product-card {
   background-color: var(--white);
   color: var(--clr-text-primary);
@@ -517,6 +521,9 @@ article.nextSlide {
 .price:hover {
   transition: var(--transition);
   background-color: var(--zany-pink-400);
+}
+.price:active {
+  transform: scale(1.05);
 }
 
 /* Users */

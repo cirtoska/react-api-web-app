@@ -1,7 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { IoTrashBin } from "react-icons/io5";
+import ToDoForm from "../components/ToDoForm";
 
 const ToDoList = () => {
   const getLocalStorage = () => {
@@ -14,24 +15,7 @@ const ToDoList = () => {
   };
   const [toDo, setToDo] = useState(getLocalStorage());
 
-  const toDoValue = useRef(null);
-
-  useEffect(() => {
-    toDoValue.current.focus();
-  }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const todo = {
-      id: Math.floor(Math.random() * 1000000),
-      name: toDoValue.current.value,
-      done: false,
-    };
-
-    setToDo((toDo) => [...toDo, todo]);
-    toDoValue.current.value = "";
-  };
+  const addToDo = (todo) => setToDo((toDo) => [...toDo, todo]);
 
   useEffect(() => {
     localStorage.setItem("toDo", JSON.stringify(toDo));
@@ -58,21 +42,12 @@ const ToDoList = () => {
     setToDo(newList);
   };
 
-  // if (!toDo) return null;
   return (
     <div>
       <NavBar />
       <h1>To Do List</h1>
       <main className="todo-list">
-        <form className="search-form" onSubmit={handleSubmit}>
-          <div className="form-component">
-            <input
-              type="text"
-              placeholder="Add Your Item Here"
-              ref={toDoValue}
-            />
-          </div>
-        </form>
+        <ToDoForm addToDo={addToDo} />
         <div>
           <ul>
             {toDo.map((toDo, id) => {
@@ -95,7 +70,9 @@ const ToDoList = () => {
               );
             })}
           </ul>
-          <button onClick={clearList}>clear-list</button>
+          <button onClick={clearList} className="btn">
+            clear-list
+          </button>
         </div>
       </main>
       <Footer />
