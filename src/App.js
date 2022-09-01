@@ -14,35 +14,38 @@ import AddUser from "./components/AddUser";
 import Login from "./pages/Login";
 import PrivateRoutes from "./utility/PrivateRoutes";
 import ToDoList from "./pages/ToDoList";
+// import ToDoes from "./pages/ToDoes";
 import PassingThoughts from "./pages/PassingThoughts";
-import TestContext from "./pages/TestContext";
 import TestContextCopy from "./pages/TestContextCopy";
+import TestContext from "./pages/TestContext";
+import { ContextProvider } from "./utility/context";
 
 function App() {
   return (
     <div className="App">
-      {/* <h1>Product List</h1> */}
-      {/* <ProductList /> */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route element={<PrivateRoutes />}>
-          <Route path="/products" element={<ProductList />} />
-          <Route path="/products/:id" element={<Product />} />
-          <Route path="/users" element={<BrowseUsers />} />
-          <Route path="/users/:id" element={<User />} />
-          <Route path="/posts" element={<Blog />} />
-          <Route path="/posts/:id" element={<Post />} />
-          <Route path="/cart" element={<Carts />} />
-          <Route path="/cart/:id" element={<Cart />} />
-          <Route path="/add-user" element={<AddUser />} />
-          <Route path="/todolist" element={<ToDoList />} />
-          <Route path="/thoughts" element={<PassingThoughts />} />
-          <Route path="/testcontext" element={<TestContext />} />
-          <Route path="/testcontext1" element={<TestContextCopy />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <ContextProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route element={<PrivateRoutes />}>
+            <Route path="/products" element={<ProductList />} />
+            <Route path="/products/:id" element={<Product />} />
+            <Route path="/users" element={<BrowseUsers />} />
+            <Route path="/users/:id" element={<User />} />
+            <Route path="/posts" element={<Blog />} />
+            <Route path="/posts/:id" element={<Post />} />
+            <Route path="/cart" element={<Carts />} />
+            <Route path="/cart/:id" element={<Cart />} />
+            <Route path="/add-user" element={<AddUser />} />
+            <Route path="/todolist" element={<ToDoList />} />
+            {/* <Route path="/todolist" element={<ToDoes />} /> */}
+            <Route path="/thoughts" element={<PassingThoughts />} />
+            <Route path="/testcontext" element={<TestContext />} />
+            <Route path="/testcontext1" element={<TestContextCopy />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </ContextProvider>
     </div>
   );
 }

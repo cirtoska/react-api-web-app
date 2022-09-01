@@ -11,6 +11,7 @@ import {
   FaPhoneAlt,
 } from "react-icons/fa";
 import Footer from "../components/Footer";
+import Loading from "../utility/Loading";
 
 const User = () => {
   let { id } = useParams();
@@ -47,11 +48,7 @@ const User = () => {
   }, [id]);
 
   if (loading) {
-    return (
-      <main>
-        <div className="spinner"></div>
-      </main>
-    );
+    return <Loading />;
   }
 
   const {

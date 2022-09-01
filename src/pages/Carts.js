@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { FaShoppingBag } from "react-icons/fa";
 import Footer from "../components/Footer";
+import Loading from "../utility/Loading";
 
 const Carts = () => {
   const url = "https://dummyjson.com/carts";
@@ -24,11 +25,7 @@ const Carts = () => {
   }, []);
 
   if (loading) {
-    return (
-      <main>
-        <div className="spinner"></div>
-      </main>
-    );
+    return <Loading />;
   }
 
   if (carts.length === 0) return null;

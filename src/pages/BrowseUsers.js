@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import { debounce } from "lodash";
 import Footer from "../components/Footer";
+import Loading from "../utility/Loading";
 
 // const url = "https://dummyjson.com/users";
 const url = "https://dummyjson.com/users/search?q=";
@@ -31,11 +32,7 @@ const BrowseUsers = () => {
   }, [searchTerm, fetchUsers]);
 
   if (loading) {
-    return (
-      <main>
-        <div className="spinner"></div>
-      </main>
-    );
+    return <Loading />;
   }
   if (users.length < 1) {
     return <h2 className="user-title">no such user in our database</h2>;

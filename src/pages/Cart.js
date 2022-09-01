@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { IoTrashBin, IoBagCheckOutline } from "react-icons/io5";
 import Footer from "../components/Footer";
+import Loading from "../utility/Loading";
 
 const Cart = () => {
   let { id } = useParams();
@@ -22,14 +23,10 @@ const Cart = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [url]);
 
   if (loading) {
-    return (
-      <main>
-        <div className="spinner"></div>
-      </main>
-    );
+    return <Loading />;
   }
 
   if (cart.length === 0) return null;

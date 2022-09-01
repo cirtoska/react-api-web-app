@@ -40,7 +40,7 @@ const Login = () => {
     <>
       <NavBar />
       <ToastContainer />
-      <main>
+      <main id="login">
         <h1>
           <Link to="/">Home</Link> / Login
         </h1>

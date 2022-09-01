@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
-import axios from "axios";
 import { useParams, useLocation, Link } from "react-router-dom";
 import { VscReactions } from "react-icons/vsc";
 import Footer from "../components/Footer";
+import Loading from "../utility/Loading";
 
 const Post = () => {
   let { id } = useParams();
@@ -14,11 +14,6 @@ const Post = () => {
   const [loading, setLoading] = useState(true);
   const [post, setPost] = useState([]);
   const [comments, setComments] = useState([]);
-  const [addComment, setAddComment] = useState({
-    body: "",
-    postId: "",
-    userId: "",
-  });
 
   const fetchPost = async () => {
     const response = await fetch(url);
@@ -40,31 +35,8 @@ const Post = () => {
     fetchComments();
   }, [pathname]);
 
-  const addNewComment = () => {
-    axios
-      .post("https://dummyjson.com/comments/add", {
-        body: addComment.body,
-        postId: addComment.postId,
-        userId: addComment.userId,
-      })
-      .then((res) => {
-        console.log("res", res);
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
-  };
-  useEffect(() => {
-    // console.log(data);
-    addNewComment(addComment);
-  }, [addComment]);
-
   if (loading) {
-    return (
-      <main>
-        <div className="spinner"></div>
-      </main>
-    );
+    return <Loading />;
   }
   if (post.length === 0) return null;
   const { title, body, userId, reactions, tags } = post;
@@ -102,7 +74,7 @@ const Post = () => {
               - Comments <sup>{comments.length}</sup>
             </h2>
             {comments.map((comment) => {
-              const { id, body, postId, user } = comment;
+              const { id, body, user } = comment;
 
               return (
                 <div className="comments" key={id}>
@@ -118,29 +90,25 @@ const Post = () => {
             })}
             <div className="add-new-comment">
               <h2>Leave a comment</h2>
-              <form className="comment-form" onSubmit={addNewComment}>
+              <form className="comment-form">
                 <div className="comment-container">
-                  <label htmlFor="username">Your name</label>
+                  <label htmlFor="username"></label>
                   <input
                     type="text"
                     name="username"
                     id="username"
-                    onChange={(e) =>
-                      setAddComment({ ...addComment, username: e.target.value })
-                    }
+                    placeholder="Write your name here..."
                   />
                 </div>
                 <div className="comment-container">
-                  <label htmlFor="textarea">Your Message</label>
+                  <label htmlFor="textarea"></label>
                   <textarea
                     id="textarea"
-                    onChange={(e) =>
-                      setAddComment({ ...addComment, body: e.target.value })
-                    }
+                    placeholder="What are your thoughts?"
                   />
                 </div>
-                <button type="submit" className="btn btn-xl">
-                  Send
+                <button type="submit" className="btn">
+                  Respond
                 </button>
               </form>
             </div>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import Loading from "../utility/Loading";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -21,11 +22,7 @@ const ProductList = () => {
       });
   }, []);
   if (loading) {
-    return (
-      <main>
-        <div className="spinner"></div>
-      </main>
-    );
+    return <Loading />;
   }
   if (products.length === 0) return null;
   return (

@@ -1,14 +1,16 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { Context } from "../utility/context";
 
 const TestContextCopy = () => {
-  // const { balls, setBalls } = useGlobalContext(15);
-  // useEffect(() => {
-  //   setBalls(balls);
-  //   console.log(balls);
+  const { balls } = useContext(Context);
 
-  //   return () => {};
-  // }, []);
-  return <div>TestContext-copy</div>;
+  return (
+    <div>
+      <h1>Balls: {balls}</h1>
+      <Link to={"/testcontext"}>New Value</Link>
+    </div>
+  );
 };
 
 export default TestContextCopy;

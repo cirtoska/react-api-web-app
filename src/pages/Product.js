@@ -3,6 +3,7 @@ import { useParams, useLocation, Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import { FaStar, FaMinus, FaPlus } from "react-icons/fa";
 import Footer from "../components/Footer";
+import Loading from "../utility/Loading";
 
 const Product = () => {
   let { id } = useParams();
@@ -29,11 +30,7 @@ const Product = () => {
   }, [pathname]);
 
   if (loading) {
-    return (
-      <main>
-        <div className="spinner"></div>
-      </main>
-    );
+    return <Loading />;
   }
   const { title, description, price, category, brand, images, rating } =
     product;

@@ -3,6 +3,8 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { IoTrashBin } from "react-icons/io5";
 import ToDoForm from "../components/ToDoForm";
+import ToDoes from "./ToDoes";
+import { Link } from "react-router-dom";
 
 const ToDoList = () => {
   const getLocalStorage = () => {
@@ -45,7 +47,9 @@ const ToDoList = () => {
   return (
     <div>
       <NavBar />
-      <h1>To Do List</h1>
+      <h1>
+        <Link to="/">Home</Link> / ToDo List
+      </h1>
       <main className="todo-list">
         <ToDoForm addToDo={addToDo} />
         <div>
@@ -74,6 +78,7 @@ const ToDoList = () => {
             clear-list
           </button>
         </div>
+        <ToDoes />
       </main>
       <Footer />
     </div>

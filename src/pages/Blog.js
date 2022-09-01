@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
+import Loading from "../utility/Loading";
 
 const Blog = () => {
   const [loading, setLoading] = useState(true);
@@ -24,11 +25,7 @@ const Blog = () => {
   }, []);
 
   if (loading) {
-    return (
-      <main>
-        <div className="spinner"></div>
-      </main>
-    );
+    return <Loading />;
   }
   if (posts.length === 0) return null;
 
