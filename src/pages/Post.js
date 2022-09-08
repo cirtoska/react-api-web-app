@@ -1,46 +1,44 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
-import { useParams, useLocation, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import { VscReactions } from "react-icons/vsc";
 import Footer from "../components/Footer";
-import Loading from "../utility/Loading";
+import useFetch from "../utility/useFetch";
+// import Comments from "../components/Comments";
 
 const Post = () => {
   let { id } = useParams();
-  let { pathname } = useLocation();
   const url = `https://dummyjson.com/posts/${id}`;
   const commentsUrl = `https://dummyjson.com/comments/post/${id}`;
 
-  const [loading, setLoading] = useState(true);
+  let { pathname } = useLocation();
+
+  const { data } = useFetch(url);
   const [post, setPost] = useState([]);
   const [comments, setComments] = useState([]);
 
-  const fetchPost = async () => {
-    const response = await fetch(url);
-    const data = await response.json();
-    setPost(data);
-    setLoading(false);
-  };
+  useEffect(() => {
+    if (data) setPost(data);
+  }, [data, url]);
 
   const fetchComments = async () => {
     const response = await fetch(commentsUrl);
     const commentsData = await response.json();
     const comments = commentsData.comments;
     setComments(comments);
-    setLoading(false);
   };
 
   useEffect(() => {
-    fetchPost();
-    fetchComments();
-  }, [pathname]);
+    setPost([]);
+  }, [url]);
 
-  if (loading) {
-    return <Loading />;
-  }
+  useEffect(() => {
+    fetchComments();
+  }, [pathname, url]);
+
   if (post.length === 0) return null;
   const { title, body, userId, reactions, tags } = post;
-  console.log(userId);
+
   return (
     <>
       <NavBar />
@@ -69,6 +67,7 @@ const Post = () => {
             </span>
           </div>
           <p className="description">{body}</p>
+          {/* <Comments /> */}
           <div className="comments-section">
             <h2>
               - Comments <sup>{comments.length}</sup>

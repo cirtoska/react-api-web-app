@@ -1,29 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-import Loading from "../utility/Loading";
+import useFetch from "../utility/useFetch";
 
 const ProductList = () => {
+  const url = "https://dummyjson.com/products";
+  const { data } = useFetch(url);
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("https://dummyjson.com/products")
-      .then((response) => {
-        console.log(response.data.products);
-        setProducts(response.data.products);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-  if (loading) {
-    return <Loading />;
-  }
+    if (data) setProducts(data);
+  }, [data]);
+
+  useEffect(() => {
+    setProducts([]);
+  }, [url]);
+
   if (products.length === 0) return null;
   return (
     <>
@@ -33,7 +26,7 @@ const ProductList = () => {
       </h1>
       <main id="products">
         <ul>
-          {products.map((product) => {
+          {products.products.map((product) => {
             const { id, title, description, thumbnail, price } = product;
             return (
               <li className="display-list" key={id}>

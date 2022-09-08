@@ -5,13 +5,13 @@ import Loading from "../utility/Loading";
 const ToDoes = () => {
   const url = "https://jsonplaceholder.typicode.com/todos";
 
-  const { toDoes } = useFetch(url);
+  const { data } = useFetch(url);
 
-  if (!toDoes) return <Loading />;
+  if (!data) return <Loading />;
   return (
     <div>
       <ul>
-        {toDoes.map((toDo, id) => {
+        {data.map((toDo, id) => {
           return (
             <li
               className={toDo.completed ? "done todo-item" : "todo-item"}
