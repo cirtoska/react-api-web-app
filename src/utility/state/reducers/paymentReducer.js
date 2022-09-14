@@ -2,6 +2,7 @@ import { actionConstants } from "../actioConstants";
 
 const initialState = {
   payment: [],
+  login: [],
 };
 
 export const paymentReducer = (state = { value: 0 }, action) => {

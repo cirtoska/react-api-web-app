@@ -4,6 +4,7 @@ import {
   addPayment,
   removePayment,
   resetPayment,
+  addObject,
 } from "../utility/state/actions/paymentAction";
 
 const Redux = () => {
@@ -19,7 +20,7 @@ const Redux = () => {
   const reset = () => {
     dispatch(resetPayment());
   };
-  const addObject = () => {
+  const addObject1 = () => {
     const addUser = {
       firstName: "Alex",
       lastName: "Chi",
@@ -28,11 +29,13 @@ const Redux = () => {
   };
   return (
     <>
-      <h1>{store.value}</h1>
+      <h1>
+        {store.value.firstName || store.value} {store.value.lastName}
+      </h1>
       <button onClick={increment}>Increment</button>
       <button onClick={decrement}>Decrement</button>
       <button onClick={reset}>Reset</button>
-      <button onClick={addObject}>addObject</button>
+      <button onClick={addObject1}>addObject</button>
     </>
   );
 };

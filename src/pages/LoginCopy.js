@@ -1,50 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "../components/Footer";
-import { useDispatch, shallowEqual, useSelector } from "react-redux";
-import { login } from "../utility/state/actions/loginAction";
 import apiClient from "../utility/apiCall";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
+  const [user, setUser] = useState({ username: "", password: "" });
   const notify = (type, message) => toast[type](message);
-  const dispatch = useDispatch();
 
   let navigate = useNavigate();
 
-  const store = useSelector((store) => store.login, shallowEqual);
-  console.log(store);
-  const handleSubmit = (e) => {
+  const getLogin = (e) => {
     e.preventDefault();
-
     apiClient
       .post("https://dummyjson.com/auth/login", {
-        username: username,
-        password: password,
+        username: user.username,
+        password: user.password,
       })
       .then((res) => {
         console.log("res", res.data);
-
-        dispatch(
-          login({
-            name: username,
-            password: password,
-          })
-        );
-        console.log("store", res.data);
-
+        localStorage.setItem("token", JSON.stringify(res.data.token));
         notify("success", "success");
-        navigate("/");
+        navigate(`/users/`, { replace: true });
       })
       .catch((error) => {
         notify("error", error.response.data.message);
         console.log("error", error);
       });
   };
+  useEffect(() => {
+    console.log("user", user);
+  }, [user]);
 
   return (
     <>
@@ -55,7 +45,7 @@ const Login = () => {
           <Link to="/">Home</Link> / Login
         </h1>
         <div className="login-wraper">
-          <form className="login-form" onSubmit={handleSubmit}>
+          <form className="login-form" onSubmit={getLogin}>
             <div className="login-container">
               <label htmlFor="username">Username</label>
               <input
@@ -63,7 +53,7 @@ const Login = () => {
                 name="username"
                 id="username"
                 placeholder="enter your username"
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => setUser({ ...user, username: e.target.value })}
               />
             </div>
             <div className="login-container">
@@ -73,7 +63,7 @@ const Login = () => {
                 name="password"
                 id="password"
                 placeholder="enter your password"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
               />
               <Link to="#" className="forgot-pass">
                 Forgot Your Password?

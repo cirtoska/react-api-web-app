@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import { paymentReducer } from "./paymentReducer";
+import { loginReducer } from "./loginReducer";
+// import { paymentReducer } from "./paymentReducer";
 
 const reducer = combineReducers({
-  payment: paymentReducer,
+  // payment: paymentReducer,
+  login: loginReducer,
 });
 
 export default reducer;

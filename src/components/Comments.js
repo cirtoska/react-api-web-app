@@ -5,21 +5,17 @@ import { Link, useLocation, useParams } from "react-router-dom";
 const Comments = () => {
   let { id } = useParams();
   const url = `https://dummyjson.com/comments/post/${id}`;
-  const [comments, setComments] = useState([]);
+
   const { data } = useFetch(url);
-
-  useEffect(() => {
-    if (data) setComments(data);
-  }, [data, url]);
-
   console.log("data:", data);
 
+  if (!data) return null;
   return (
     <div className="comments-section">
       <h2>
-        - Comments <sup>{comments.length}</sup>
+        - Comments <sup>{data.comments.length}</sup>
       </h2>
-      {/* {data.comments.map((comment) => {
+      {data.comments.map((comment) => {
         const { id, body, user } = comment;
 
         return (
@@ -33,7 +29,7 @@ const Comments = () => {
             </div>
           </div>
         );
-      })} */}
+      })}
       <div className="add-new-comment">
         <h2>Leave a comment</h2>
         <form className="comment-form">

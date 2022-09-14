@@ -6,15 +6,11 @@ import {
   FaSignOutAlt,
   FaBars,
 } from "react-icons/fa";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { logout } from "../utility/state/actions/loginAction";
 
 const NavBar = () => {
   const [showLinks, setShowLinks] = useState(false);
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
-  const store = useSelector((store) => store.login, shallowEqual);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const linksHeight = linksRef.current.getBoundingClientRect().height;
@@ -24,10 +20,11 @@ const NavBar = () => {
       linksContainerRef.current.style.height = "0px";
     }
   }, [showLinks]);
-  const logOut = (e) => {
-    e.preventDefault();
-    dispatch(logout());
+  const logOut = () => {
+    localStorage.removeItem("token");
   };
+
+  let auth = { token: JSON.parse(localStorage.getItem("token")) };
 
   return (
     <header>
@@ -47,7 +44,7 @@ const NavBar = () => {
           <Link to="/cart" className="icon-cart" title="Carts List">
             <FaShoppingCart />
           </Link>
-          {store.value ? (
+          {auth.token ? (
             <Link to="/" className="icon-cart" title="LogOut" onClick={logOut}>
               <FaSignOutAlt />
             </Link>

@@ -23,6 +23,8 @@ import Loading from "./utility/Loading";
 import { Provider } from "react-redux";
 import store from "./utility/state/store";
 import Redux from "./pages/Redux";
+import Logout from "./pages/Logout";
+import Pagination from "./pages/Pagination";
 
 function App() {
   return (
@@ -43,12 +45,13 @@ function App() {
               <Route path="/cart/:id" element={<Cart />} />
               <Route path="/add-user" element={<AddUser />} />
               <Route path="/todolist" element={<ToDoList />} />
-              <Route path="/thoughts" element={<PassingThoughts />} />
               <Route path="/testcontext" element={<TestContext />} />
               <Route path="/testcontext1" element={<TestContextCopy />} />
               <Route path="/redux" element={<Redux />} />
             </Route>
+            <Route path="/pagination" element={<Pagination />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Loading />

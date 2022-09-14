@@ -20,9 +20,9 @@ export function resetPayment() {
   };
 }
 
-export function addObject(user) {
+export function addObject(userName) {
   return {
     type: actionConstants.ADDOBJECT,
-    payload: user,
+    payload: userName,
   };
 }

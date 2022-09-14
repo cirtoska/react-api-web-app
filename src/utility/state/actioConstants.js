@@ -3,4 +3,6 @@ export const actionConstants = {
   DECREMENT: "DECREMENT",
   RESET: "RESET",
   ADDOBJECT: "ADDOBJECT",
+  LOGIN: "LOGIN",
+  LOGOUT: "LOGOUT",
 };
