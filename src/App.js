@@ -14,7 +14,7 @@ import AddUser from "./components/AddUser";
 import Login from "./pages/Login";
 import PrivateRoutes from "./utility/PrivateRoutes";
 import ToDoList from "./pages/ToDoList";
-import PassingThoughts from "./pages/PassingThoughts";
+// import PassingThoughts from "./pages/PassingThoughts";
 import TestContextCopy from "./pages/TestContextCopy";
 import TestContext from "./pages/TestContext";
 // import { ContextProvider } from "./utility/context";

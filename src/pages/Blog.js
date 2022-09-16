@@ -1,33 +1,38 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
-import Loading from "../utility/Loading";
+import useFetchPaginate from "../utility/useFetch";
+import Posts from "./Posts";
+import Paginate from "../utility/Paginate";
 
 const Blog = () => {
-  const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
 
   const url = "https://dummyjson.com/posts";
-  useEffect(() => {
-    axios
-      .get(url)
-      .then((response) => {
-        const posts = response.data.posts;
-        // console.log(posts);
-        setLoading(false);
-        setPosts(posts);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
-  if (posts.length === 0) return null;
+  const { data } = useFetchPaginate(url);
+
+  useEffect(() => {
+    if (data) setPosts(data);
+  }, [data]);
+
+  useEffect(() => {
+    setPosts([]);
+  }, [url]);
+
+  if (!data) return null;
+
+  // Get current posts
+  const indexOfLastPosts = currentPage * postsPerPage;
+  const indexOfFirstPosts = indexOfLastPosts - postsPerPage;
+  const currentPosts = data.posts.slice(indexOfFirstPosts, indexOfLastPosts);
+
+  // Change page
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
@@ -37,31 +42,35 @@ const Blog = () => {
       </h1>
       <main id="blog">
         <ul className="blog-template">
-          {posts.map((post) => {
-            const { id, title, body, tags } = post;
-            return (
-              <li className="blog-post" key={id}>
-                <h2 className="post-title">{`${title.substring(0, 50)}...`}</h2>
-                <div className="product-header">
-                  <span className="tags">
-                    {tags.map((tag, index) => {
-                      return (
-                        <span className="category" key={index}>
-                          {tag}
-                        </span>
-                      );
-                    })}
-                  </span>
-                </div>
-                <p>{`${body.substring(0, 100)}...`}</p>
-                <Link to={`/posts/${id}`}>
-                  <button className="btn blog-btn">read more</button>
-                </Link>
-                {/* <div className="line"></div> */}
-              </li>
-            );
+          {currentPosts.map((post) => {
+            const { id } = post;
+            return <Posts key={id} {...post} />;
           })}
         </ul>
+        <Paginate
+          postsPerPage={postsPerPage}
+          totalPosts={data.posts.length}
+          paginate={paginate}
+        />
+        {/* <div className="btn-container">
+          <button className="prev-btn" onClick={prevPage}>
+            prev
+          </button>
+          {data.posts.map((item, index) => {
+            return (
+              <button
+                key={index}
+                // className={`page-btn ${index === page ? "active-btn" : null}`}
+                onClick={() => handlePage(index)}
+              >
+                {index + 1}
+              </button>
+            );
+          })}
+          <button className="next-btn" onClick={nextPage}>
+            next
+          </button>
+        </div> */}
       </main>
       <Footer />
     </>
