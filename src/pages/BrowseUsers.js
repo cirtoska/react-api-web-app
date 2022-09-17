@@ -4,6 +4,7 @@ import NavBar from "../components/NavBar";
 import { debounce } from "lodash";
 import Footer from "../components/Footer";
 import Loading from "../utility/Loading";
+import Paginate from "../utility/Paginate";
 
 // const url = "https://dummyjson.com/users";
 const url = "https://dummyjson.com/users/search?q=";
@@ -13,6 +14,8 @@ const BrowseUsers = () => {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("a");
   const searchValue = useRef("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(6);
 
   const fetchUsers = useCallback(async () => {
     try {
@@ -46,7 +49,15 @@ const BrowseUsers = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  console.log(searchTerm);
+
+  // Get current posts
+  const indexOfLastPosts = currentPage * postsPerPage;
+  const indexOfFirstPosts = indexOfLastPosts - postsPerPage;
+  const currentPosts = users.slice(indexOfFirstPosts, indexOfLastPosts);
+
+  // Change page
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <>
       <NavBar />
@@ -68,7 +79,7 @@ const BrowseUsers = () => {
           </div>
         </form>
         <div className="container">
-          {users.map((user) => {
+          {currentPosts.map((user) => {
             const {
               id,
               firstName,
@@ -100,6 +111,13 @@ const BrowseUsers = () => {
               </Link>
             );
           })}
+        </div>
+        <div className="users-pagination">
+          <Paginate
+            postsPerPage={postsPerPage}
+            totalPosts={users.length}
+            paginate={paginate}
+          />
         </div>
       </main>
       <Footer />

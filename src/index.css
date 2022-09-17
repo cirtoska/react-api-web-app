@@ -366,7 +366,7 @@ article.nextSlide {
   color: var(--zany-pink-600);
  }
 /* Products */
-#products, #blog {
+#products, .blog {
   background-color: var(--zany-pink-50);
 }
 .icon-back {
@@ -535,7 +535,12 @@ article.nextSlide {
 }
 
 /* Users */
-
+.users-pagination {
+  color: var(--gray-900);
+  background-color: var(--white);
+  border-radius: var(--radius);
+  margin: 0 1rem;
+}
 .about-user {
   text-align: right;
   margin-bottom: 1rem;
@@ -658,11 +663,12 @@ img.user-image {
 
 /* Blog */
 
-#blog {
+.blog {
   color: var(--gray-900);
   background-color: var(--white);
+  border-radius: var(--radius);
 }
-#blog a {
+.blog a {
   color: inherit;
 }
 .blog-template {
@@ -681,6 +687,27 @@ text-align: left;
 
 .blog-post p, .blog-post h2 {
 padding: 1rem;
+}
+
+.pagination {
+  display: flex;
+  padding: 2rem;
+  justify-content: center;
+}
+
+.page-item {
+  list-style-type: none;
+  padding: 5px 12px;
+  font-size: 1.2rem;
+  border: 1px solid var(--gray-50);
+  cursor: pointer;
+}
+
+.page-item:hover {
+  background-color: var(--zany-pink-50);
+}
+.page-item:active {
+  background-color: var(--zany-pink-100);
 }
 
 /* Post */

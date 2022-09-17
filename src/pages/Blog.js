@@ -40,7 +40,7 @@ const Blog = () => {
       <h1>
         <Link to="/">Home</Link> / Blog
       </h1>
-      <main id="blog">
+      <main className="blog">
         <ul className="blog-template">
           {currentPosts.map((post) => {
             const { id } = post;
