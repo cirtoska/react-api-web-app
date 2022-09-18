@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import useFetch from "../utility/useFetch";
+import Paginate from "../utility/Paginate";
 
 const ProductList = () => {
   const url = "https://dummyjson.com/products";
   const { data } = useFetch(url);
   const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
 
   useEffect(() => {
     if (data) setProducts(data);
@@ -18,6 +21,18 @@ const ProductList = () => {
   }, [url]);
 
   if (products.length === 0) return null;
+
+  // Get current posts
+  const indexOfLastPosts = currentPage * postsPerPage;
+  const indexOfFirstPosts = indexOfLastPosts - postsPerPage;
+  const currentPosts = products.products.slice(
+    indexOfFirstPosts,
+    indexOfLastPosts
+  );
+
+  // Change page
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <>
       <NavBar />
@@ -26,7 +41,7 @@ const ProductList = () => {
       </h1>
       <main id="products">
         <ul>
-          {products.products.map((product) => {
+          {currentPosts.map((product) => {
             const { id, title, description, thumbnail, price } = product;
             return (
               <li className="display-list" key={id}>
@@ -48,6 +63,11 @@ const ProductList = () => {
             );
           })}
         </ul>
+        <Paginate
+          postsPerPage={postsPerPage}
+          totalPosts={products.products.length}
+          paginate={paginate}
+        />
       </main>
       <Footer />
     </>

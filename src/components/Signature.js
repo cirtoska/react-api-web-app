@@ -5,8 +5,8 @@ const Signature = () => {
     <span className="signature">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="320"
-        height="100"
+        width="150"
+        height="50"
         viewBox="0 0 320 100"
       >
         <text
