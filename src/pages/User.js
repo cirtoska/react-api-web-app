@@ -70,6 +70,7 @@ const User = () => {
     }
   };
   if (!user) return null;
+  console.log(getPosts);
   return (
     <>
       <NavBar />
@@ -135,23 +136,27 @@ const User = () => {
             </div>
           </div>
 
-          <h2>Posts from {firstName}</h2>
-          <div className="user-posts">
-            {getPosts.map((items) => {
-              const { id, title, body } = items;
-              return (
-                <div className="postId" key={id}>
-                  <h3>{`${title.substring(0, 40)}...`}</h3>
-                  <p>
-                    {`${body.substring(0, 100)}...`}{" "}
-                    <Link to={`/posts/${id}`}>
-                      <span className="text-btn">read more</span>
-                    </Link>
-                  </p>
-                </div>
-              );
-            })}
-          </div>
+          {getPosts.length > 0 ? (
+            <>
+              <h2>Posts from {firstName}</h2>
+              <div className="user-posts">
+                {getPosts.map((items) => {
+                  const { id, title, body } = items;
+                  return (
+                    <div className="postId" key={id}>
+                      <h3>{`${title.substring(0, 40)}...`}</h3>
+                      <p>
+                        {`${body.substring(0, 100)}...`}{" "}
+                        <Link to={`/posts/${id}`}>
+                          <span className="text-btn">read more</span>
+                        </Link>
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
+          ) : null}
         </div>
         <div className="footer-navigation">
           <Link to={`/users/${parseInt(id) - 1}`}>

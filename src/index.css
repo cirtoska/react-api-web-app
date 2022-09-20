@@ -47,8 +47,11 @@ body {
   color: var(--white);
   font-family: 'Raleway', sans-serif;
   line-height: 1.4;
+  
 }
-
+.App {
+  text-align: center;
+}
 h1 {
   padding: 2rem;
   font-size: 3rem;
@@ -141,10 +144,12 @@ a {
 main {
   max-width: 1100px;
   margin: 0 auto 2rem;
-  min-height: 68vh;
   border-radius: var(--radius);
+  min-height: 80vh;
 }
-
+#cart, #product {
+  min-height: 66vh;
+}
 img {
   width: 100%;
   border-radius: var(--radius);
@@ -356,6 +361,7 @@ article.nextSlide {
  .job-title {
   text-transform: uppercase;
   font-weight: 600;
+  font-size: 0.9rem;
  }
  .job-title::after {
   content: " }";
@@ -430,6 +436,7 @@ article.nextSlide {
   border-radius: var(--radius);
   box-shadow: var(--dark-shadow);
   margin: 1rem;
+
 }
 
 /* Product Page */
@@ -532,6 +539,10 @@ article.nextSlide {
 }
 .price:active {
   transform: scale(1.05);
+}
+/*  Add User */
+.add-user {
+  padding-top: 5rem;
 }
 
 /* Users */

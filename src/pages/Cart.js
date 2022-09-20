@@ -46,7 +46,7 @@ const Cart = () => {
         <Link to="/">Home</Link> / <Link to="/cart">Carts</Link> / Cart #
         {userId}
       </h1>
-      <main>
+      <main id="cart">
         <div className="product-card single-product">
           <div className="item-titles">
             <p>Title</p>
