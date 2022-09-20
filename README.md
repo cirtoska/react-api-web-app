@@ -1,4 +1,4 @@
-# IWEC Academy for Fronend Web Development - Final React Project
+# IWEC Academy for Frontend Web Development - Final React Project
 
 live version https://react-api-web-app.vercel.app/
 Login username: kminchelle
