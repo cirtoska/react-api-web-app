@@ -33,17 +33,18 @@ function App() {
         <LoadingContextProvider>
           <Routes>
             <Route path="/" element={<Home />} />
+
+            <Route path="/products" element={<ProductList />} />
+            <Route path="/products/:id" element={<Product />} />
+            <Route path="/users" element={<BrowseUsers />} />
+            <Route path="/users/:id" element={<User />} />
+            <Route path="/posts" element={<Blog />} />
+            <Route path="/posts/:id" element={<Post />} />
+            <Route path="/cart" element={<Carts />} />
+            <Route path="/cart/:id" element={<Cart />} />
+            <Route path="/todolist" element={<ToDoList />} />
             <Route element={<PrivateRoutes />}>
-              <Route path="/products" element={<ProductList />} />
-              <Route path="/products/:id" element={<Product />} />
-              <Route path="/users" element={<BrowseUsers />} />
-              <Route path="/users/:id" element={<User />} />
-              <Route path="/posts" element={<Blog />} />
-              <Route path="/posts/:id" element={<Post />} />
-              <Route path="/cart" element={<Carts />} />
-              <Route path="/cart/:id" element={<Cart />} />
               <Route path="/add-user" element={<AddUser />} />
-              <Route path="/todolist" element={<ToDoList />} />
               <Route path="/testcontext" element={<TestContext />} />
               <Route path="/testcontext1" element={<TestContextCopy />} />
               <Route path="/redux" element={<Redux />} />
